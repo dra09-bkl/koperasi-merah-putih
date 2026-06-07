@@ -275,3 +275,8 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 require __DIR__.'/auth.php';
+
+Route::get('/perbaiki-foto', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return 'Jalur foto berhasil dibuka! Silakan kembali ke web dan refresh.';
+})->middleware('auth');
