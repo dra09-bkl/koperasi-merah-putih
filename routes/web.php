@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\TbModal;
 use App\Models\TbPinjaman;
-use App\Models\Tbpenarikan;
+use App\Models\TbPenarikan;
 
 /*
 |--------------------------------------------------------------------------

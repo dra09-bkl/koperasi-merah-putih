@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tbpenarikan; 
+use App\Models\TbPenarikan; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TbpenarikanController extends Controller
+class TbPenarikanController extends Controller
 {
     // =========================================================================
     // ANGGOTA
@@ -17,8 +17,8 @@ class TbpenarikanController extends Controller
      */
     public function index()
     {
-        // Menggunakan Tbpenarikan
-        $penarikan = Tbpenarikan::where('user_id', Auth::id())
+        // Menggunakan TbPenarikan
+        $penarikan = TbPenarikan::where('user_id', Auth::id())
             ->latest()
             ->paginate(10);
         
@@ -53,11 +53,10 @@ class TbpenarikanController extends Controller
             'rekening_tujuan.required' => 'Nomor rekening wajib diisi.',
             'nama_rekening.required'   => 'Nama pemilik rekening wajib diisi.',
         ]);
-
-        // Menggunakan Tbpenarikan
-        Tbpenarikan::create([
+        // Menggunakan TbPenarikan
+        TbPenarikan::create([
             'user_id'          => Auth::id(),
-            'kode_penarikan'   => Tbpenarikan::generateKode(),
+            'kode_penarikan'   => TbPenarikan::generateKode(),
             'jumlah'           => $request->jumlah,
             'nama_bank'        => $request->nama_bank,
             'rekening_tujuan'  => $request->rekening_tujuan,
@@ -79,8 +78,8 @@ class TbpenarikanController extends Controller
      */
     public function adminIndex(Request $request)
     {
-        // Menggunakan Tbpenarikan
-        $query = Tbpenarikan::with('user')->latest();
+        // Menggunakan TbPenarikan
+        $query = TbPenarikan::with('user')->latest();
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -93,9 +92,9 @@ class TbpenarikanController extends Controller
         }
 
         $penarikan     = $query->paginate(15)->withQueryString();
-        $totalPending  = Tbpenarikan::where('status', 'pending')->count();
-        $totalDisetujui = Tbpenarikan::where('status', 'disetujui')->count();
-        $totalDitolak  = Tbpenarikan::where('status', 'ditolak')->count();
+        $totalPending  = TbPenarikan::where('status', 'pending')->count();
+        $totalDisetujui = TbPenarikan::where('status', 'disetujui')->count();
+        $totalDitolak  = TbPenarikan::where('status', 'ditolak')->count();
 
         // Jika folder admin ditaruh di dalam folder views/admin/penarikan/index.blade.php
         // Silakan sesuaikan return view-nya jika lokasinya berbeda
@@ -107,7 +106,7 @@ class TbpenarikanController extends Controller
     /**
      * Detail penarikan (admin).
      */
-    public function adminShow(Tbpenarikan $penarikan)
+    public function adminShow(TbPenarikan $penarikan)
     {
         $penarikan->load('user', 'diprosesoleh');
         return view('admin.penarikan_show', compact('penarikan'));
@@ -116,7 +115,7 @@ class TbpenarikanController extends Controller
     /**
      * Setujui pengajuan penarikan.
      */
-    public function approve(Request $request, Tbpenarikan $penarikan)
+    public function approve(Request $request, TbPenarikan $penarikan)
     {
         if ($penarikan->status !== 'pending') {
             return back()->with('error', 'Pengajuan ini sudah diproses sebelumnya.');
@@ -140,7 +139,7 @@ class TbpenarikanController extends Controller
     /**
      * Tolak pengajuan penarikan.
      */
-    public function reject(Request $request, Tbpenarikan $penarikan)
+    public function reject(Request $request, TbPenarikan $penarikan)
     {
         if ($penarikan->status !== 'pending') {
             return back()->with('error', 'Pengajuan ini sudah diproses sebelumnya.');
