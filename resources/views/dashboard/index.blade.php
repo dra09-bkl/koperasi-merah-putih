@@ -197,11 +197,11 @@
 
                     <div class="profile-info-wrapper">
                         <div class="avatar-outer">
-                            <a href="{{ auth()->user()->foto ? asset('storage/' . auth()->user()->foto) : asset('sbadmin2/img/undraw_profile.svg') }}"
+                            <a href="{{ asset('sbadmin2/img/undraw_profile.svg') }}"
                                 data-fancybox="profile"
                                 data-caption="{{ auth()->user()->name }}">
-                                <img src="{{ auth()->user()->foto ? asset('storage/' . auth()->user()->foto) : asset('sbadmin2/img/undraw_profile.svg') }}"
-                                    class="profile-avatar" id="preview-img" alt="Foto Profil">
+                                <img src="{{ asset('sbadmin2/img/undraw_profile.svg') }}"
+                                    class="profile-avatar" id="preview-img" alt="Foto">
                             </a>
                         </div>
 
