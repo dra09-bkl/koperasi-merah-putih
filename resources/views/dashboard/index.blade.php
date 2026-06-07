@@ -197,14 +197,10 @@
 
                     <div class="profile-info-wrapper">
                         <div class="avatar-outer">
-                            <a href="{{ asset('sbadmin2/img/undraw_profile.svg') }}"
-                                data-fancybox="profile"
-                                data-caption="{{ auth()->user()->name }}">
-                                <img src="{{ asset('sbadmin2/img/undraw_profile.svg') }}"
-                                    class="profile-avatar" id="preview-img" alt="Foto">
-                            </a>
+                            <div class="avatar-outer">
+                            <img src="{{ asset('sbadmin2/img/undraw_profile.svg') }}" 
+                                 class="profile-avatar" id="preview-img" alt="Foto">
                         </div>
-
                         <div class="profile-details">
                             <h3>{{ auth()->user()->name }}</h3>
                             <p><i class="fa-solid fa-envelope me-2"></i> {{ auth()->user()->email }}</p>
