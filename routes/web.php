@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TbPinjamanController;
 use App\Http\Controllers\TbmodalController;
 use App\Http\Controllers\TbcicilanController;
-use App\Http\Controllers\TbpenarikanController;
+use App\Http\Controllers\TbPenarikanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User;
